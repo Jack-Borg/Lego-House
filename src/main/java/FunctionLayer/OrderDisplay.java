@@ -11,7 +11,9 @@ package FunctionLayer;
  */
 public class OrderDisplay
 {
+
     int id_order;
+    int id_user;
     int amount1;
     int amount2;
     int amount4;
@@ -31,6 +33,16 @@ public class OrderDisplay
     public int getId_order()
     {
         return id_order;
+    }
+
+    public int getId_user()
+    {
+        return id_user;
+    }
+
+    public void setId_user(int id_user)
+    {
+        this.id_user = id_user;
     }
 
     public int getAmount1()
@@ -57,6 +69,5 @@ public class OrderDisplay
     {
         return sent;
     }
-    
-    
+
 }

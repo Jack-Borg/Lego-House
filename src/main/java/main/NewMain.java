@@ -27,18 +27,27 @@ public class NewMain
      */
     public static void main(String[] args)
     {
-        try
-        {
-            System.out.println(LogicFacade.calculatePrice(LogicFacade.calculateBricks(6, 8, 8)));
-        } catch (LoginSampleException ex)
-        {
-            Logger.getLogger(NewMain.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        ArrayList<Layer> lay = LogicFacade.calculateBricks(8, 8, 8);
-        for (int i = 0; i < lay.size(); i++)
-        {
-            System.out.println(lay.get(i));
-        }
+//        try
+//        {
+//            Order order = new Order(0, 8, 8, 8, 10, true);
+//            order.setId_order(1);
+//            DBAccess.OrderMapper.updateOrder(order);
+////        try
+////        {
+////            System.out.println(LogicFacade.calculatePrice(LogicFacade.calculateBricks(6, 8, 8)));
+////        } catch (LoginSampleException ex)
+////        {
+////            Logger.getLogger(NewMain.class.getName()).log(Level.SEVERE, null, ex);
+////        }
+////        ArrayList<Layer> lay = LogicFacade.calculateBricks(8, 8, 8);
+////        for (int i = 0; i < lay.size(); i++)
+////        {
+////            System.out.println(lay.get(i));
+////        }
+//        } catch (LoginSampleException ex)
+//        {
+//            Logger.getLogger(NewMain.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         
 
     }

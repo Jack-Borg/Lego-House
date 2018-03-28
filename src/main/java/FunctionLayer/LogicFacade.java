@@ -29,18 +29,27 @@ public class LogicFacade
         WallBuilder builder = new WallBuilder();
         return builder.build(height, width, length);
     }
-    
+
     public static ArrayList<OrderDisplay> getOrders(int id_user) throws LoginSampleException
     {
-        
         return OrderMapper.getOrders(id_user);
     }
+
+    public static ArrayList<OrderDisplay> getOrders() throws LoginSampleException
+    {
+        return OrderMapper.getOrders();
+    }
     
+    public static void updateOrder(int id_order, boolean sent) throws LoginSampleException
+    {
+        OrderMapper.updateOrder(id_order, sent);
+    }
+
     public static int placeOrder(Order order) throws LoginSampleException
     {
         return OrderMapper.placeOrder(order);
     }
-    
+
     public static int calculatePrice(ArrayList<Layer> layers) throws LoginSampleException
     {
         return OrderMapper.calculatePrice(layers);

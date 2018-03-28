@@ -34,7 +34,6 @@
                     out.println("<td>" + o.getPrice()+ "</td>");
                     out.println("<td>" + o.isSent()+ "</td>");
                     out.println("</tr>");
-                    
                 }
                 %>
             </tbody>

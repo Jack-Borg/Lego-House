@@ -50,6 +50,35 @@ public class OrderMapper
         }
     }
 
+    public static ArrayList<OrderDisplay> getOrders() throws LoginSampleException
+    {
+        ArrayList<OrderDisplay> orders = new ArrayList<>();
+        String SQL = "select * from LegoHouse.orders";
+        try
+        {
+            Connection con = Connector.connection();
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next())
+            {
+                int id_order = rs.getInt("id_order");
+                int length = rs.getInt("length");
+                int width = rs.getInt("width");
+                int height = rs.getInt("height");
+                int price = rs.getInt("price");
+                boolean sent = rs.getBoolean("sent");
+                ArrayList<Layer> layers = LogicFacade.calculateBricks(height, length, width);
+                OrderDisplay order = new OrderDisplay(id_order, countBricksSize(layers, 1), countBricksSize(layers, 2), countBricksSize(layers, 4), price, sent);
+                order.setId_user(rs.getInt("id_user"));
+                orders.add(order);
+            }
+            return orders;
+        } catch (SQLException | ClassNotFoundException ex)
+        {
+            throw new LoginSampleException(ex.getMessage());
+        }
+    }
+
     public static int placeOrder(Order order) throws LoginSampleException
     {
         String SQL = "insert into LegoHouse.orders (id_user, length, width, height, price) values(?, ?, ?, ?, ?)";
@@ -125,27 +154,30 @@ public class OrderMapper
             }
         }
 
-//        int amount1 = 0;
-//        int amount2 = 0;
-//        int amount4 = 0;
-//        for (Layer l : layers)
-//        {
-//            for (Brick b : l.getBricks())
-//            {
-//                switch (b.getLength())
-//                {
-//                    case (1):
-//                        amount1 += b.getAmount();
-//                        break;
-//                    case (2):
-//                        amount2 += b.getAmount();
-//                        break;
-//                    case (3):
-//                        amount4 += b.getAmount();
-//                        break;
-//                }
-//            }
-//        }
         return amount;
+    }
+
+    public static void updateOrder(int id_order, boolean sent) throws LoginSampleException
+    {
+        String SQL = "UPDATE LegoHouse.orders SET sent=? WHERE id_order=?;";
+        
+        try
+        {
+            Connection con = Connector.connection();
+            PreparedStatement ps = con.prepareStatement(SQL);
+
+            if (sent)
+            {
+                ps.setInt(1, 1);
+            } else
+            {
+                ps.setInt(1, 0);
+            }
+            ps.setInt(2, id_order);
+            ps.executeUpdate();
+        } catch (SQLException | ClassNotFoundException ex)
+        {
+            throw new LoginSampleException(ex.getMessage());
+        }
     }
 }
